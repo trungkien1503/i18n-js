@@ -7,6 +7,7 @@ module I18n
     if JS::Dependencies.rails?
       require "i18n/js/middleware"
       require "i18n/js/engine"
+      I18n.backend = I18n::Backend::Simple.new
     end
 
     # deep_merge by Stefan Rusterholz, see <http://www.ruby-forum.com/topic/142809>.
@@ -136,6 +137,7 @@ module I18n
 
     # Initialize and return translations
     def self.translations
+      I18n.backend = I18n::Backend::Simple.new
       ::I18n.backend.instance_eval do
         init_translations unless initialized?
         translations
